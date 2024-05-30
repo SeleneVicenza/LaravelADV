@@ -7,7 +7,10 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 bg-white">
-            <form class="space-y-8 divide-y divide-gray-200">
+
+            <form action="{{ route('users.store') }}" method="POST" class="space-y-8 divide-y divide-gray-200">
+                @csrf
+
                 <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
                     <div class="pt-8 space-y-6 sm:pt-10 sm:space-y-5">
                         <div>
@@ -24,10 +27,12 @@
                                     Nome
                                 </label>
                                 <div class="mt-1 sm:mt-0 sm:col-span-2">
-                                    <input type="text" name="first_name" id="first_name" autocomplete="given-name"
+                                    <input type="text" name="first_name" id="first_name" value="{{ old('first_name') }}" autocomplete="given-name"
                                            class="max-w-lg block w-full shadow-sm focus:ring-indigo-500
-                               focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
-                                </div>
+                               focus:border-indigo-500 sm:max-w-xs sm:text-sm @error('first_name') border-red-500 @enderror rounded-md">
+                                @error('first_name') <small class="text-red-500">{{ $message }}</small>@enderror
+
+                            </div>
                             </div>
 
                             <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
@@ -35,10 +40,11 @@
                                     Email
                                 </label>
                                 <div class="mt-1 sm:mt-0 sm:col-span-2">
-                                    <input type="email" name="email" id="email" autocomplete="family-name"
+                                    <input type="email" name="email" id="email" value="{{ old('email') }}" autocomplete="family-name"
                                            class="max-w-lg block w-full shadow-sm focus:ring-indigo-500
-                               focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
-                                </div>
+                               focus:border-indigo-500 sm:max-w-xs sm:text-sm @error('email') border-red-500 @enderror rounded-md">
+                               @error('email') <small class="text-red-500">{{ $message }}</small>@enderror
+                            </div>
                             </div>
                         </div>
                     </div>

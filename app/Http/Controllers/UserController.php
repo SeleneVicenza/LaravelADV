@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\SaveUserRequest;
 use App\Models\User;
 
 class UserController extends Controller
@@ -25,7 +26,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('users.create');
     }
 
     /**
@@ -34,9 +35,27 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SaveUserRequest $request)
     {
-        //
+        //dd($request->except('_token')); //esclude il token dalla request
+        /* $request->validate([
+            'first_name' => ['required','string'],
+            'email' => ['required','email']
+        ]); */
+
+        /*
+        // GESTIONE MANUALE DELLA VALIDAZIONE
+        $validator = Validator::make($request->all(), [
+            'first_name' => ['required','string', 'min:4'],
+            'email' => ['required','email']
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('users/create')
+                ->withErrors($validator)
+                ->withInput();
+        } */
+
     }
 
     /**
@@ -58,7 +77,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::findOrFail($id);
+        return view('users.edit', compact('user'));
     }
 
     /**
@@ -70,7 +90,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+       /*  $user */
     }
 
     /**
